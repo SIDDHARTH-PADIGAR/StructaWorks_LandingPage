@@ -77,9 +77,9 @@ export default function Waitlist() {
     }
 
     if (!supabase) {
-      // Mock success if no supabase instance available
-      setStatus("success");
-      triggerConfetti();
+      // Throw an explicit error instead of mocking success so it's impossible to lose leads in production
+      setStatus("error");
+      setErrorMsg("Database Connection Failed: NEXT_PUBLIC_SUPABASE_URL and ANON_KEY are either missing from Vercel or misconfigured.");
       return;
     }
 
